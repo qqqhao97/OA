@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bwf.entity.Menu;
 import com.bwf.entity.User;
 import com.bwf.service.IUserService;
 import com.bwf.utils.StringUtils;
@@ -45,9 +46,11 @@ public class UserController {
 			return "redirect:/user/login?error=1";
 		}else{
 			logger.info("登录成功");
-			
+//			User userWithMenus = userservice.getMenusByUserId(loginUser.getUserId());
 			session.setAttribute("user", loginUser);
-			
+//			for(Menu m : userWithMenus.getMenus()){
+//				logger.info(m.getMenuName());
+//			}
 			return "redirect:/index";
 		}
 	}

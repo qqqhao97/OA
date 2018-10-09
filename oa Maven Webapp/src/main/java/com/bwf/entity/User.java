@@ -4,7 +4,7 @@ import java.util.List;
 
 public class User {
 
-	private Integer userId;
+	private int userId;
 	
 	private String username;
 	
@@ -14,12 +14,21 @@ public class User {
 	
 	private String avater;
 	
-	
+	private List<Menu> menus;
+
+	public List<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
+
 	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

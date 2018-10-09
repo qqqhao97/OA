@@ -16,7 +16,19 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User login(User user) {
 		// TODO Auto-generated method stub
-		return usermapper.getUserByUsernameAndPassword(user);
+		//含基本信息的对象
+		User u = usermapper.getUserByUsernameAndPassword(user);
+		
+		if(u!= null){
+			u = usermapper.getMenusByUserId(user.getUserId());
+		}
+		return u;
 	}
+
+
+//	public User getMenusByUserId(int id) {
+//		// TODO Auto-generated method stub
+//		return usermapper.getMenusByUserId(id);
+//	}
 
 }
