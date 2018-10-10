@@ -97,7 +97,7 @@
 	      	</div>
 	      	
 	      	<ul class="list-group" style="margin-top: 20px;">
-	      		<li class="list-group-item list-group-item-slider hand nopadding nomargin noborder"><a href="javascript:void(0)" id="admin_home.html" target="iframe-index" class="full-link list-group-item-url list-group-item-link list-group-item-link-active"><img src="img/57323.png" height="20px" class="img img-circle"/>&nbsp;&nbsp;后台首页</a></li>
+	      		<li class="list-group-item list-group-item-slider hand nopadding nomargin noborder"><a href="javascript:void(0)" id="home" target="iframe-index" class="full-link list-group-item-url list-group-item-link list-group-item-link-active"><img src="img/57323.png" height="20px" class="img img-circle"/>&nbsp;&nbsp;后台首页</a></li>
 	      		
 	      		<#list user.menus as menu>
 	      		<#if menu.pid=null>
@@ -105,7 +105,7 @@
 	      		<ul class="list-group nomargin nopadding noborder" style="display: none;">
 	      			<#list user.menus as menu1>
 	      			<#if menu1.pid=menu.menuId>
-	      			<li class="list-group-item list-group-item-slider hand nopadding nomargin noborder"><a href="javascript:void(0)" id="admin_form_1.html" target="iframe-index" class="full-link list-group-item-link-small list-group-item-url"><img src="img/48323.png" height="20px" class="img img-circle"/>&nbsp;&nbsp;${menu1.menuName}</a></li>
+	      			<li class="list-group-item list-group-item-slider hand nopadding nomargin noborder"><a href="javascript:void(0)" id="${menu1.menuUrl}" target="iframe-index" class="full-link list-group-item-link-small list-group-item-url"><img src="img/48323.png" height="20px" class="img img-circle"/>&nbsp;&nbsp;${menu1.menuName}</a></li>
 	      			</#if>
 	      			</#list>
 	      		</ul>
@@ -133,7 +133,7 @@
 	      			<div class="left" id="panel-right-nav-head">
 	      				
 		      			
-			      		<div id='admin_home.html' class='left cap-title cap-title-active hand' align='center'>
+			      		<div id='home' class='left cap-title cap-title-active hand' align='center'>
 			      			<img src='img/57323.png' height='20px' class='img img-circle hand'/> 后台首页
 			      		</div>
 			      		

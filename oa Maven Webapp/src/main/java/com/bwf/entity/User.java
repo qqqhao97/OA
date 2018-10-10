@@ -14,7 +14,34 @@ public class User {
 	
 	private String avater;
 	
+	private User leader;
+	
+	public User getLeader() {
+		return leader;
+	}
+
+	public void setLeader(User leader) {
+		this.leader = leader;
+	}
+
 	private List<Menu> menus;
+	
+	private List<Operate> operates;
+	
+	
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", nickname=" + nickname + ", avater=" + avater
+				+ "]";
+	}
+
+	public List<Operate> getOperates() {
+		return operates;
+	}
+
+	public void setOperates(List<Operate> operates) {
+		this.operates = operates;
+	}
 
 	public List<Menu> getMenus() {
 		return menus;

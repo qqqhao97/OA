@@ -12,21 +12,39 @@
 		<result column="password" property="password"/>
 		<result column="nickname" property="nickname"/>
 		<result column="avater" property="avater"/>
+		<association property="leader" 
+					javaType="com.bwf.entity.User"
+					column="leader_id"
+					select="getUserById"></association>
 	</resultMap>
 
 	
-	<resultMap id="userWithMenus" type="com.bwf.entity.User">
+	<resultMap id="userWithMenusAndOperates" type="com.bwf.entity.User">
 		<id column="user_id" property="userId"/>
 		<result column="username" property="username"/>
 		<result column="password" property="password"/>
 		<result column="nickname" property="nickname"/>
 		<result column="avater" property="avater"/>
 	  <collection property="menus" ofType="com.bwf.entity.Menu" resultMap="com.bwf.dao.MenuMapper.menu"></collection>
+	  <collection property="operates" ofType="com.bwf.entity.Operate" resultMap="com.bwf.dao.OperateMapper.operate"></collection>
 	</resultMap>
   
 
     <select id="getUserById" parameterType="int" resultType="com.bwf.entity.User">
         select * from `user` where user_id = #{id}
+    </select>
+    
+    <select id="getAllUsers" resultMap="simpleUser">
+        select * from `user` 
+    </select>
+    
+    
+    <select id="getAllUsersByPage" resultMap="simpleUser">
+        select * from `user` limit #{page} ,#{pageSize}
+    </select>
+    
+    <select id="getAllUsersCount" resultType="int">
+        select count(*) from `user` 
     </select>
     
     <select id="getUserByUsernameAndPassword" 
@@ -35,16 +53,18 @@
     	select * from `user` where username = #{username} and password = #{password}
    	</select>
     
-    <select id="getMenusByUserId" parameterType="int" resultMap="userWithMenus">
-    	SELECT DISTINCT
-		user.*,menu.*
+    <select id="getMenusAndOperatesByUserId" parameterType="int" resultMap="userWithMenusAndOperates">
+    	SELECT 
+		user.*,menu.*,operate.*
 		FROM user
 		INNER JOIN user_role ON user_role.user_id = user.user_id
 		INNER JOIN role ON user_role.role_id = role.role_id
 		INNER JOIN role_permission ON role_permission.role_id = role.role_id
 		INNER JOIN permission ON role_permission.permission_id = permission.permission_id
-		INNER JOIN permission_menu ON permission_menu.permission_id = permission.permission_id
-		INNER JOIN menu ON permission_menu.menu_id = menu.menu_id
+		Left outer join permission_menu ON permission_menu.permission_id = permission.permission_id
+		Left outer join menu ON permission_menu.menu_id = menu.menu_id
+		Left outer join permission_operate on permission.permission_id = permission_operate.permission_id
+		Left outer join operate on permission_operate.operate_id = operate.operate_id
 		WHERE user.user_id = #{userId};
     </select>
     
@@ -56,6 +76,14 @@
     <!-- 删除 一个 user -->
     <delete id="delete" parameterType="int">
     	delete from user where user_id = #{id}
+    </delete>
+    
+    <!-- 删除多个User -->
+    <delete id="deleteMulti">
+    	delete from user where user_id in 
+    	<foreach collection="idArr" open="(" close=")" separator="," item="id">
+    		#{id}
+    	</foreach>
     </delete>
     
     <update id="update" parameterType="com.bwf.entity.User">

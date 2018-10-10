@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 对应 dao 中的 接口 -->
+<mapper namespace="com.bwf.dao.OperateMapper">
+	
+	<!--column不做限制，可以为任意表的字段，而property须为type 定义的pojo属性-->
+	<resultMap id="operate" type="com.bwf.entity.Operate">
+	  <id column="operate_id" property="operateId" />
+	  <result column="operate_name" property="operateName"/>
+	  <result column="operate_action" property="operateAction"/>
+	  <result column="operate_url" property="operateUrl"/>
+	  <result column="pid" property="pid"/>
+	</resultMap>
+
+
+</mapper>

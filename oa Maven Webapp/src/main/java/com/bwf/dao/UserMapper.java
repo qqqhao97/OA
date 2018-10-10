@@ -1,5 +1,9 @@
 package com.bwf.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.bwf.entity.User;
 
 public interface UserMapper {
@@ -14,6 +18,14 @@ public interface UserMapper {
 	
 	User getUserByUsernameAndPassword(User user);
 	
-	User getMenusByUserId(int userId);
+	User getMenusAndOperatesByUserId(int userId);
+
+	List<User> getAllUsers();
+	
+	Integer getAllUsersCount();
+
+	List<User> getAllUsersByPage(@Param("page")Integer page, @Param("pageSize")Integer pageSize);
+
+	void deleteMulti(@Param("idArr") Integer[] idArr);
 	
 }
